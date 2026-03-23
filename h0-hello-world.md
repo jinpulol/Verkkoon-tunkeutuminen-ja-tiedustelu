@@ -1,4 +1,4 @@
-#h0 - Hello World
+# h0 - Hello World
 
 a) Eka tehtävä
 
