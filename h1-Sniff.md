@@ -127,14 +127,14 @@ Osoitan tehtävään vaaditut TCP/IP neljä kerrosta hyödyntämällä edellisen
   - Vastaa sovellusten välisestä tiedonsiirrosta
 
 ### Sovelluskerros:
-- DNS (Domain Name System
+- DNS (Domain Name System)
   - Paketti on DNS-kysely
   - Tarkoituksena selvittää domain nimen IP-osoite.
     - Esimerkiksi, kun käyttäjä avaa verkkosivun
 
 ## e) Mitäs tuli surffattua?
 
-Tehtävässä tuli selvittä mitä annetussa .pcap -tiedostosta voisi saada irti. Tiedostoa tuli tutkia Wiresharkilla yleisellä tasolla vastaten muutamiin kysymyksiin. Latasin ja avasin tiedoston virtuaalikoneen Wiresharkilla. 
+Tehtävässä tuli selvittää mitä annetussa .pcap -tiedostosta voisi saada irti. Tiedostoa tuli tutkia Wiresharkilla yleisellä tasolla vastaten muutamiin kysymyksiin. Latasin ja avasin tiedoston virtuaalikoneen Wiresharkilla. 
 
 Yleisellä tasolla kuvailuun tehtävänannossa mainittiin seuraavaa: _montako konetta näkyy, mitä protokollia pistää silmään. Määrästä voit arvioida esimerkiksi pakettien lukumäärää, kaappauksen kokoa ja kestoa._
 
