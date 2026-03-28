@@ -1,0 +1,1 @@
+Kansio kotitehtävissä käytettäviin kuvakaappauksille.
