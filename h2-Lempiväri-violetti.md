@@ -132,7 +132,15 @@ Liian suuri loki luettavaksi? Etsisin toistuvia osumia sanalle nmap tai merkkijo
 
 ## e) Wiresharking
 
+Sieppaa verkkoliikenne porttiskannatessa Wiresharkilla. Etsi tallennetusta pcap-tiedostosta kohdat, joissa on sana "nmap" ja kommentoi niitä.
 
+Ensimmäisenä käynnistin Wiresharkin ja valitsin sen sieppaamaan localhostia, eli ``Loopback: lo``:ta. Avasin uuden päätteen, jolla porttiskannasin localhostia komennolla ``$ sudo nmap -A localhost``. Porttiskannauksen käynnistämisen jälkeen taustalla oleva Wireshark alkoi myös sieppaamaan liikennettä.
+
+![kuva8](images/h2-wirenmap.png)
+
+Pysäytin tämän jälkeen sieppauksen Wiresharkissa, ja tallensin sieppauksen nimellä ``localhost1104``. Tiedosto löytyi helposti nimellä, kun halusin avata tallennetun sieppauksen tutkittavaksi. Rajasin sieppauksen tuloksia display filterin avulla, käyttäen rajausta ``frame contains "nmap". Tuloksia löytyi alun reilun 2800 sijasta nyt enää 54 kappaletta.
+
+![kuva9](images/h2-containsnmap.png)
 
 
 
