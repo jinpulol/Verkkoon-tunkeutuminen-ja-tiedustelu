@@ -72,3 +72,67 @@ Rivin analysointi:
 
 Rivin analysointiin käytin apuna Sumo Logicin [artikkelia](https://www.sumologic.com/blog/apache-access-log) ja Apachen omaa [opasta](https://httpd.apache.org/docs/2.4/logs.html). User-Agentin purkamiseksi käytin Mozillan [developer](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/User-Agent)-sivuja.
 
+## b) Nmapped
+
+Tehtävässä tuli porttiskannata oma weppipalvelin ja selittää tulokset.
+
+Ensimmäisenä irroitin Debianin verkosta valitsemalla oikean yläkulman verkkovalikosta *Disconnect*. Tarkistin vielä yhteyden varmasti olevan poikki pingaamalla googlen DNS:ää ``$ ping 8.8.8.8``. Vastauksena sain ``ping: connect: Network is unreachable``. Verkko on siis katkaistu.
+
+![kuva4](images/h2-pingtest.png)
+
+Ensimmäisellä yrittämällä porttiskannata localhostia komennolla ``$ sudo nmap -A localhost`` ei onnistunut. Virheilmoitus ``sudo: nmap: command not found`` kertoi selkeästi, ettei nmappia ole asennettuna vielä. Palautin verkon asennuksen ajaksi ja asensin nmapin ``$ sudo apt-get install nmap``.
+Asentamisen jälkeen verkko uusiksi irti ja testaus pingillä.
+
+>Nmap -A tarkoittaa aggressiivista skannausta. Skannaus sisältää mm. käyttöjärjestelmän tunnistuksen, palveluiden versioiden tunnistuksen, skriptiskannauksen ja tracerouten. Lisää aiheesta nmapin [dokumentaatiosta](https://nmap.org/book/man-misc-options.html).
+
+![kuva5](images/h2-nmapvirhe.png)
+
+Toisella yrittämällä porttiskannaus komennolla ``$ sudo nmap -A localhost`` onnistui. Tehtävässä riitti selittää pelkästään http-portin 80/tcp -tulokset.
+
+![kuva6](images/h2-nmap80.png)
+
+Tuloksista käy ilmi seuraavaa:
+- ``80/tcp  open  http    Apache httpd 2.4.66 ((Debian))``
+  - 80/tcp on tavallinen HTTP-verkkopalvelimen portti.
+  - open - portti on auki ja siihen saa yhteyden.
+  - http - Nmap tunnisti palveluksi HTTP:n
+  - Apache httpd 2.4.86 (Debian) - Palvelimessa pyörii Apachen weppipalvelin, versio 2.4.66, Debian-järjestelmässä.
+- ``|_http-title: Apache2 Debian Default Page: It works``
+  - HTTP-vastaus palautti title-tagin. Apachessa pyörii oletussivu.
+- ``|_http-server-header: Apache/2.4.66 (Debian)``
+  - HTTP-vastauksen Server-otsake kertoo vielä kerran käynnissä olevan weppipalvelimen, tämän version ja ympäristön.
+ 
+## c) Skriptit
+
+Q: Mitkä skriptit olivat automaattisesti päällä, kun käytit "-A" -parametriä?
+
+- http-title
+  - Näyttää web-palvelimen oletussivun otsikon eli käytännössä HTML-sivun <title>-tiedon.
+- http-server-header
+  - Lukee HTTP-vastauksen server-otsakkeen ja käyttää sitä palvelun versiotietojen täydentämiseen.
+- http-robots.txt 
+  - Tarkistaa, löytyykö palvelimelta /robots.txt-tiedosto, ja etsii siitä Disallow-merkintöjä eli polkuja, joita roboteille ei haluta indeksoitavan.
+- Vastausten apuna käytetty NSE scriptien [dokumentaatiota](https://nmap.org/nsedoc/scripts/).
+
+## d) Jäljet lokissa
+
+Etsi weppipalvelimen lokeista jälkiä porttiskannauksesta ja selitä osumat. Millaisilla hauilla tai säännöillä voisi tunnistaa porttiskannauksen jostain toisesta, laajemmasta lokista?
+
+Tehtävässä menin lukemaan uudelleen Apachen lokeja komennolla ``$ sudo tail -F /var/log/apache2/access.log``. Vastauksessa löytyi useampi rivi, josta löytyi ``Nmap Scripting Engine``-jälki.
+
+![kuva7](images/h2-tail2.png)
+
+- Lokista löytyi sana Nmap User-Agent-kentästä: ``Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)``.
+  - Tämä osoittaa, että web-palvelimeen tehtiin pyyntöjä Nmapin NSE-skripteillä.
+- Useat OPTIONS / -pyynnöt viittaavat palvelimen HTTP-ominaisuuksien ja sallittujen metodien kartoittamiseen.
+- GET /favicon.ico -pyyntö liittyy palvelun tai sivuston tunnistamiseen; vastauksena saatiin 404, eli tiedostoa ei löytynyt.
+- GET / -pyynnöt näyttävät etusivun hakemista, mikä sopii esimerkiksi http-title- ja http-server-header-skriptien toimintaan.
+
+Liian suuri loki luettavaksi? Etsisin toistuvia osumia sanalle nmap tai merkkijonolle nmap scripting engine. Lisäksi tarkistaisin tuleeko samasta IP-osoitteesta paljon erilaisia pyyntöjä lyhyessä ajassa. Tähän varmasti löytyy skriptejä. *<sup>Editoin ehkä myöhemmin tähän kyseisen skriptin.</sup>*
+
+## e) Wiresharking
+
+
+
+
+
