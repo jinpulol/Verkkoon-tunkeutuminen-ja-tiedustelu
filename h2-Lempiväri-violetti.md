@@ -138,9 +138,128 @@ Ensimmäisenä käynnistin Wiresharkin ja valitsin sen sieppaamaan localhostia, 
 
 ![kuva8](images/h2-wirenmap.png)
 
-Pysäytin tämän jälkeen sieppauksen Wiresharkissa, ja tallensin sieppauksen nimellä ``localhost1104``. Tiedosto löytyi helposti nimellä, kun halusin avata tallennetun sieppauksen tutkittavaksi. Rajasin sieppauksen tuloksia display filterin avulla, käyttäen rajausta ``frame contains "nmap". Tuloksia löytyi alun reilun 2800 sijasta nyt enää 54 kappaletta.
+Pysäytin tämän jälkeen sieppauksen Wiresharkissa, ja tallensin esillä olevan sieppauksen nimellä ``localhost1104``. Tiedosto löytyi helposti nimellä, kun halusin avata tallennetun tämän tutkittavaksi. Rajasin sieppauksen tuloksia display filterin avulla, käyttäen rajausta ``frame contains "nmap". Tuloksia löytyi alun reilun 2800 sijasta nyt enää 54 kappaletta.
 
 ![kuva9](images/h2-containsnmap.png)
+
+Analyysiä tuloksista:
+- Yllä olevan yhden paketin tulos:
+  - Paketti etenee TCP/IP-mallin neljän kerroksen kautta: linkkikerros, verkkokerros, kuljetuskerros ja sovelluskerros.
+    - Tämä näkyy Wiresharkissa riveinä Ethernet II, Internet Protocol Version 4, Transmission Control Protocol ja Hypertext Transfer Protocol.
+  - Paketissa näkyy Nmapin NSE-skriptin tekemä HTTP-pyyntö porttiin 80.
+    - ``Dst Port: 80``
+    - ``User-Agent: Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)``
+  - ``OPTIONS / HTTP/1.1`` viittaa siihen, että Nmap selvittää weppipalvelimen tukemia HTTP-toimintoja.
+    - Lisäksi / viittaa, että pyyntö kohdistuu juuripolkuun.
+  - Lähde- ja kohdeosoite ovat molemmat 127.0.0.1, joten liikenne tapahtuu localhostin sisällä loopback-liitännässä.
+- Yleisesti tarkasteltuna suurin osa tuloksista koostuu HTTP-pyynnöistä ja -vastauksista.
+- Liikenteessä esiintyy erityisesti metodeja OPTIONS, GET ja POST, mikä todennäköisesti viittaa weppipalvelun toiminnan ja ominaisuuksien tarkasteluun.
+- Yleisten metodien lisäksi PROPFIND-metodia ilmenee aika paljon.
+  - WebDAV-metodi, jolla haetaan resurrsin tai hakemiston ominaisuuksia.
+    - WebDAV on HTTP-protokollan laajennus, joka mahdollistaa tiedostojen ja hakemistojen käsittelyn web-palvelimella etänä.
+  - Lähde: https://http.dev/webdav
+
+## f) Net grep
+
+Sieppaa verkkoliikenne 'ngrep' komennolla ja näytä kohdat, joissa on sana "nmap".
+
+Tehtävänannon vinkeistä löytyi komento ``$ sudo ngrep -d lo -i nmap``. Ngrepin [dokumentaation](https://linux.die.net/man/8/ngrep) perusteella komennolla:
+- -d valitaan kuunneltava verkkoliintäntä. Tässä tapauksessa lo = loopback, localhost.
+- -i etsitään annettava merkkijono KiRjAiNkOoStA riippumatta.
+- nmap on etsittävä merkkijono.
+
+Komento ei kuitenkaan mennyt ensi yrittämällä läpi: ``sudo: ngrep: command not found``. Osasin odottaa virheilmoitusta, sillä aiemmassa tehtävässä myös nmap piti asentaa ensin. Kuten nmapin kohdalla, yhdistin Debianin asennuksen ajaksi verkkoon, ja asensin ngrepin ``$ sudo apt-get install ngrep``.
+Asennuksen jälkeen katkaisin verkkoyhteyden ja varmistin yhteyden olevan poikki pingaamalla ulkomaailmaa.
+
+Toinen yrittämä onnistui myös ngrepin kanssa. ``$ sudo ngrep -d lo -i nmap`` -komento alkoi sieppaamaan liikennettä. Avasin toisen komentorivin, jolla porttiskannasin localhostin ``$ sudo nmap -A localhost``. Jälleen kerran porttiskannauksen alettua alkoi sieppauksessakin käymään hulina.
+
+![kuva10](h2-hulina.png)
+
+Nmapin ajettua porttiskannaus läpi, pysäytin myös sieppauksen CTRL+C. Ngrep antoi tulokseksi 2813 pakettia, joista 54 osui etsimääni ``nmap``-merkkijonoon.
+
+![kuva11](h2-ngreptulos.png)
+
+## g) Agentti
+
+Vaihda nmapin user-agent niin, että se näyttää tavalliselta weppiselaimelta.
+
+Tehtävänannon vinkeistä löytyi nmap-skripti, jolla user-agent -kentän pyyntö tulee erittäin mielenkiintoisesta kokoonpanosta. Käytin tehtävässä hyväksi siis skriptiä ``--script-args http.useragent="BSD experimental on XBox350 alpha (emulated on Nokia 3110)"``. Apache-lokin tulkinnassa otin myös ylös tavallisen weppiselaimen user-agent -kentän tiedot, jotka siis olivat ``"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"``.
+
+Lopullinen komento seuraavaan tehtävään on siis: ``$ sudo nmap --script-args http.useragent="Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0" localhost``.
+
+## h) Pienemmät jäljet
+
+Porttiskannaa weppipalvelin uudelleen localhost-osoitteella, nyt kun user-agent on muutettu. Tarkastele sekä Apachen lokia että siepattua verkkoliikennettä. Mikä on muuttunut?
+
+Käynnistin tehtävään Wiresharkin sieppaamaan localhostia, sekä yhden komentorivin seuraamaan Apachen lokia komennolla ``$ sudo tail -F /var/log/apache2/access.log`` Sieppauksen alettua syötin toiseen komentoriviin aiemman tehtävän komennon ``sudo nmap -A --script-args http.useragent="Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0" localhost``.
+
+Porttiskannauksen alettua Wireshark alkoi sieppaamaan heti liikennettä, ja skannauksen tultua valmiiksi myös Apachen-lokeissa pyörähti uusia tapahtumia.
+
+![kuva12](images/h2-nmapfirefox.png)
+
+Apachen lokitiedostoissa User-Agent on vaihtunut Nmapin tunnisteesta Firefoxin tunnisteeseen.
+- Esimerkki vanhasta lokirivistä: ``127.0.0.1 - - [12/Apr/2026:00:35:44 +0300] "OPTIONS / HTTP/1.1" 200 181 "-" "Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)"``
+- Esimerkki uudesta lokirivistä: ``127.0.0.1 - - [12/Apr/2026:01:18:15 +0300] "OPTIONS / HTTP/1.1" 200 181 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"``
+
+Myös Wiresharkissa User-Agent on vaihtunut Nmapin tunnisteesta Firefoxin tunnisteeseen.
+- Esimerkki vanhasta: ``User-Agent: Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)\r\n``
+- Esimerkki uudesta: ``User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0\r\n``
+
+Sekä Wiresharkissa että Apachen lokitiedoissa näkyy kuitenkin vielä ``GET /nmaplowercheck1775945895 HTTP/1.1``. User-Agentin vaihtaminen vaikutti hyvin paljon nmapin näkyvyyteen, mutta ei riittäny poistamaan kaikkia jälkiä.
+
+![kuva13](h2-nmaplower.png)
+
+## i) LoWeR ChEcK
+
+Tehtävän palasia:
+- Etsi löytämääsi tekstiä /usr/share/nmap -hakemistosta:
+  - Löytämäni teksti ``GET /nmaplowercheck17...``.
+  - GET on HTTP-metodi ja numerosarja todnäk jokin yksilöivä tunniste, jäljelle jää``nmaplowercheck``.
+
+## j) FCC ID
+
+Etsi valitsemasi langattoman laitteen tiedot FCC ID:llä ja mitä tästä selviää?
+
+- Valitsin laitteekseni omat langattomat kuulokkeeni, JBL Live Pro 2 TWS. Niiden FCC ID on APILIVEPRO2TWS.
+- FCC-asiakirjoista selvisi, että laite käyttää Bluetooth 5.2 -tekniikkaa.
+- Laitteen toimintataajuus on 2402–2480 MHz, joten se toimii Bluetoothille tyypillisellä 2,4 GHz taajuusalueella.
+- Bluetoothin modulaatiot ovat GFSK, π/4-DQPSK ja 8DPSK.
+
+## Lähteet
+
+Tero Karvinen
+- https://terokarvinen.com/verkkoon-tunkeutuminen-ja-tiedustelu/#h2-lempivari-violetti
+
+David Bianco - Pyramid of Pain
+- https://detect-respond.blogspot.com/2013/03/the-pyramid-of-pain.html
+
+Adam Goss / Kraven Security - Diamond Model
+- https://kravensecurity.com/diamond-model-analysis/
+
+Linux man pages - Tail
+- https://man7.org/linux/man-pages/man1/tail.1.html
+
+Sumo Logic - Apache Access Log
+- https://www.sumologic.com/blog/apache-access-log
+
+Apache HTTP Server Documentation - Log Files
+- https://httpd.apache.org/docs/2.4/logs.html
+
+Mozilla Dev Network - User-Agent
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/User-Agent
+
+ Nmap Documentations
+ - https://nmap.org/book/man-misc-options.html
+ - https://nmap.org/nsedoc/scripts/
+
+http.dev - WebDAV
+- https://http.dev/webdav
+
+linux.die.net - ngrep
+- https://linux.die.net/man/8/ngrep
+
+
+
 
 
 
