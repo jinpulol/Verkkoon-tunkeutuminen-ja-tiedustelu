@@ -173,11 +173,11 @@ Asennuksen jälkeen katkaisin verkkoyhteyden ja varmistin yhteyden olevan poikki
 
 Toinen yrittämä onnistui myös ngrepin kanssa. ``$ sudo ngrep -d lo -i nmap`` -komento alkoi sieppaamaan liikennettä. Avasin toisen komentorivin, jolla porttiskannasin localhostin ``$ sudo nmap -A localhost``. Jälleen kerran porttiskannauksen alettua alkoi sieppauksessakin käymään hulina.
 
-![kuva10](h2-hulina.png)
+![kuva10](images/h2-hulina.png)
 
 Nmapin ajettua porttiskannaus läpi, pysäytin myös sieppauksen CTRL+C. Ngrep antoi tulokseksi 2813 pakettia, joista 54 osui etsimääni ``nmap``-merkkijonoon.
 
-![kuva11](h2-ngreptulos.png)
+![kuva11](images/h2-ngreptulos.png)
 
 ## g) Agentti
 
@@ -207,7 +207,7 @@ Myös Wiresharkissa User-Agent on vaihtunut Nmapin tunnisteesta Firefoxin tunnis
 
 Sekä Wiresharkissa että Apachen lokitiedoissa näkyy kuitenkin vielä ``GET /nmaplowercheck1775945895 HTTP/1.1``. User-Agentin vaihtaminen vaikutti hyvin paljon nmapin näkyvyyteen, mutta ei riittäny poistamaan kaikkia jälkiä.
 
-![kuva13](h2-nmaplower.png)
+![kuva13](images/h2-nmaplower.png)
 
 ## i) LoWeR ChEcK
 
