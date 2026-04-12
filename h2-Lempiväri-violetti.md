@@ -217,11 +217,11 @@ Tehtävän palasia, mahdollinen toteutus olisi mahdollisesti ollut seuraava:
 - Etsi löytämääsi tekstiä /usr/share/nmap -hakemistosta:
   - Löytämäni teksti ``GET /nmaplowercheck17...``.
     - GET on HTTP-metodi ja numerosarja todnäk jokin yksilöivä tunniste, jäljelle jää``nmaplowercheck``.
-      - Selvitys, mikä nmaplowercheckNRO tarkalleen on.
-  - "Etsi ja korvaa" -> Etsi lua-skripti josta teksti löytyy ja korvaa se toisella.
-    - Lua-scriptiä muokataan, nmaplowercheckin tilalla lukee nyt nakkisoppa.
-  - Avataan Apache-loki ja Wireshark kuten aikaisemmassa tehtävässä ja ajetaan firefox-scriptattu nmap-komento.
-  - Tarkistetaan onko nmappia, tarkistetaan löytyykö nakkisoppa
+  - Selvitys, mikä nmaplowercheckNRO tarkalleen on.
+- "Etsi ja korvaa" -> Etsi lua-skripti josta teksti löytyy ja korvaa se toisella.
+  - Lua-scriptiä muokataan, nmaplowercheckin tilalla lukee nyt nakkisoppa.
+- Avataan Apache-loki ja Wireshark kuten aikaisemmassa tehtävässä ja ajetaan firefox-scriptattu nmap-komento.
+- Tarkistetaan onko nmappia, tarkistetaan löytyykö nakkisoppa
 
 ## j) FCC ID
 
