@@ -83,6 +83,8 @@ Hyökkäys perustuu siihen, että hyökkääjä lukee yhden hotellin avainkortin
 
 Tutkijat ilmoittivat löydöksestä valmistajalle syyskuussa 2022. Korjaukset alkoivat marraskuussa 2023, mutta Unsaflok-sivuston mukaan maaliskuuhun 2024 mennessä noin 36 % vaikutuspiirissä olevista lukoista oli päivitetty tai vaihdettu. Päivittäminen on hidasta, koska korjaus ei ole pelkkä ohjelmistopäivitys: hotelleissa on käytävä läpi lukot, kortit, taustajärjestelmät ja niiden yhteensopivuus paikan päällä, usein kohde kerrallaan.
 
+Tehtävän lähteet: Kaperskyn [artikkeli](https://www.kaspersky.com/blog/unsaflok-forging-keycards-for-hotel-doors/51292/) ja [unsaflok](unsaflok.com)-sivusto.
+
 
 
 
