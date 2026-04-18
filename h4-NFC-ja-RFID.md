@@ -10,7 +10,7 @@ Mielestäni olen suojautunut RFID-urkintaa vastaan melko hyvin. Käytössäni ol
 - Puhelimen NFC-toiminto ei yleensä ole päällä, joten se ei muodosta merkittävää riskiä.
 - Passi on kotona jemmassa.
 
-Käytössäni ei ole kulkutageja, matkakortteja, älyavaimia tai älykelloja, jotka lisäisivät RFID-urkinnan mahdollisuutta. Suurin mahdollinen riskikohta ovat pankkikortit, ja tämänkin pienen riskin 
+Käytössäni ei ole kulkutageja, matkakortteja, älyavaimia tai älykelloja, jotka lisäisivät RFID-urkinnan mahdollisuutta. Suurin mahdollinen riskikohta ovat pankkikortit, ja tätäkin pientä riskiä voisi vähentää RFID-suojatulla lompakolla.
 
 ## b) APDU?
 
