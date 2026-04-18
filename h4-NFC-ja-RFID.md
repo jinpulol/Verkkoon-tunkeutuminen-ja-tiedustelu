@@ -29,6 +29,8 @@ APDU-komentojen rakenne:
   - Älykorttien sovellus- ja komentotason standardi, joka määrittelee ennen kaikkea, miten kortin ja lukijan välinen viestinvaihto rakennetaan ja tulkitaan.
  
 ![kuva1](images/h4-apdu.png)
+
+<sup>Kuvakaappaus Command APDU:n rakenteesta CardLogixin sivulta.</sup>
  
 Command APDU:
 - Command APDU jakautuu kahteen osaan, Headeriin (pakollinen) ja Bodyyn (valinnainen).
