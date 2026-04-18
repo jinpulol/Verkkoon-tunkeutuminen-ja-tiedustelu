@@ -53,7 +53,7 @@ Response APDU:
     - SW1 ja SW2 (Status Word #) - ensimmäinen ja toinen tilatavu.
       - Kertovat komennon lopputuloksen.
      
-  Esimerkkinä ``FF CA 00 00 00``, jota voidaan käyttää NFC-tagin yksilöllisen tunnisteen eli UID:n lukemiseen:
+Esimerkkinä ``FF CA 00 00 00``, jota voidaan käyttää NFC-tagin yksilöllisen tunnisteen eli UID:n lukemiseen:
   - FF = CLA, kertoo mihin komentoluokkaan käsky kuuluu.
   - CA = INS, kertoo mikä komento suoritetaan.
   - Ensimmäinen 00 = P1, ensimmäinen parametri.
@@ -63,7 +63,7 @@ Response APDU:
     - Yleensä 5 tavun komennot ovat header + le.
     - Jos komento on tätä pidempi, viides tavu on yleensä Lc (sen jälkeen Data ja viimeisenä Le).
    
-  Vastaukseksi voidaan saada ``04 7A 1C 92 90 00``:
+Vastaukseksi voidaan saada ``04 7A 1C 92 90 00``:
   - Kaksi viimeistä tavua ovat aina Status-kentät.
   - ``04 7A 1C 92`` on näin ollen Dataa, josta käy ilmi tagin palauttama UID.
   - ``90 00`` on SW1 ja SW2 tilatavuista muodostuva tilakoodi, joka tässä tapauksessa tarkoittaa onnistunutta komentoa.
