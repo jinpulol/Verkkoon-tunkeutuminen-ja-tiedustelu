@@ -18,6 +18,7 @@ Käytössäni ei ole kulkutageja, matkakortteja, älyavaimia tai älykelloja, jo
 
 APDU-komentojen rakenne:
 - APDU (Application Protocol Data Unit) on älykorttien käyttämä viestimuoto.
+- APDU-rakenne koostuu tavuista, ja komennot sekä vastaukset esitetään tavallisesti heksadesimaalisena tavujonona.
 - APDU:n avulla kortinlukija tai muu laite lähettää komentoja kortille ja vastaanottaa kortin vastauksia.
   - APDU-viestien päätyypit:
     - Command APDU - kortille lähtevä komento.
