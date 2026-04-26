@@ -174,3 +174,6 @@ Stephen Sam, Github
 
 Mininet Walkthrough
 - XTerm Display: https://mininet.org/walkthrough/#xterm-display
+
+OpenAI
+- ChatGPT, GPT-5-kielimalli
