@@ -1,3 +1,6 @@
+> Editoinnit palautuksen jälkeen: \
+> 26.4. korjattu kuva2 linkki
+
 # h5 Laboratorio- ja simulaatioympäristöt hyökkäyksissä
 
 ### Tehtävissä käytetty työympäristö
@@ -46,7 +49,7 @@ Seuraavaksi tuli pohtia, mikä oli tunnilla esitetty ARP-hyökkäys. Materiaalis
 
 Aloitin tehtävän kloonaamalla materiaalista löytyvän GitHub-repositorion Mininet-virtuaalikoneelle komennolla ``git clone https://github.com/ssam246/Network-Security-Lab.git``. Tämän jälkeen siirryin kloonattuun hakemistoon komennolla ``cd Network-Security-Lab``.
 
-![kuva2](images/h5-gitclonessam.png)
+![kuva2](images/h5-clonessam.png)
 
 ``Network-Security-Lab``-hakemistosta löytyi ``README.md``-tiedosto ja ``scripts``-kansio; samat tiedostot ja kansiot löytyivät myös GitHubin lähderepositoriosta. Ennen labraharjoituksia tarkistin myös ``README.md``-tiedoston mukaisesti, että minulla on käytössäni Python 3.x skriptien ajamiseen ja Scapy-kirjasto verkkopakettien käsittelyyn ja luomiseen. ``Python3 --version`` vastasi versioksi ``Python 3.8.10`` ja ``pip install scapy`` ilmoitti Scapyn olevan jo asennettuna ``Requirement already satisfied: scapy ...``. Komento ilmoitti myös vanhasta ``pip``-versiosta, johon en sen enempää kiinnittänyt huomiota. Tämän jälkeen esivalmistelut olivatkin valmiit.
 
