@@ -42,7 +42,7 @@ ___
     Esimerkki: 
     $ airodump-ng wlan0mon -w tiedosto --manufacturer --wps --band abg
 
-Komento skannaa 2.4 GHz:n ja 5 GHz:n verkkoja (``--band abg``), näyttää valmistaja (``--manufacturer``)- ja WPS-tietoja (``--wps``) sekä tallentaa tulokset haluttuun kansioon (``-w ~tiedosto``). Lisäämällä esimerkiksi ``-c 11`` voidaan skannaus rajata tietylle kanavalle. (aircrack-ng.org, airodump-ng)
+Komento skannaa 2.4 GHz:n ja 5 GHz:n verkkoja (``--band abg``), näyttää valmistaja (``--manufacturer``)- ja WPS-tietoja (``--wps``) sekä tallentaa tulokset haluttuun tiedostoon (``-w ~tiedosto``). Lisäämällä esimerkiksi ``-c 11`` voidaan skannaus rajata tietylle kanavalle. (aircrack-ng.org, airodump-ng)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 ``wpa_supplicant`` on langattoman client-laitteen WPA/802.11i-yhteydenhallintaan tarkoitettu työkalu. Lisäksi se hallitsee langattoman verkon tunnistautumista ja yhdistämistä. (NetBSD man-pages, wpa_supplicant)
 
-``free.conf`` on ``wpa_supplicant``-työkalun ``.conf``-asetustiedosto. Sen avulla määritetään, mihin WiFi-verkkoon yhdistetään ja millä asetuksilla. (NetBSD man-pages, wepa_supplicant.conf)
+``free.conf`` on ``wpa_supplicant``-työkalun ``.conf``-asetustiedosto. Sen avulla määritetään, mihin WiFi-verkkoon yhdistetään ja millä asetuksilla. (NetBSD man-pages, wpa_supplicant.conf)
 
     Esimerkki .conf-tiedostosta:
     network={
