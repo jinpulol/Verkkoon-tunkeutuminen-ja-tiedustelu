@@ -99,7 +99,7 @@ Pohdittuani hetken seuraavaa yritystä, luin tehtävänannon vinkeistä seuraava
 
 Kokeilin seuraavaksi avata uuden ``Recorded2_433.92M_2000k.cs8``-tiedoston rtl_433-ohjelmalla:
 
-    $ rtl -r Recorded2_433.92M_2000k.cs8
+    $ rtl_433 -r Recorded2_433.92M_2000k.cs8
 
 ![kuva5](images/h7-convertsuccess.png)
 
@@ -246,3 +246,6 @@ Brian McFee, Digital Signals Theory
 
 ChatGPT
 - Laskutehtävät 250 µs esimerkkeihin
+  - prompti: esitä pari esimerkkiä, kuinka pitkä aika on 250µs. Esimerkiksi valo on ehtinyt kulkemaan pasilasta x
+  - prompti: auto 120 kmh
+  - prompti: esimerkkejä 8.3 mm pituudesta
