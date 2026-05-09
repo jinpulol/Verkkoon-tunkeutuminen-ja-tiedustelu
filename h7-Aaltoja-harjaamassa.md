@@ -221,7 +221,7 @@ Tämän pystyi myös tarkistamaan matemaattisesti. Ajan ja näytteenottotaajuude
 
     500 / 2000000 = 0,00025s = 250µs
 
-Tässä ajassa valo olisi ehtinyt kulkea Pasilasta jonnekin Riihimäen pohjoispuolelle (~75 kilometriä). 
+Tässä ajassa valo olisi ehtinyt kulkea Pasilasta jonnekin Riihimäen pohjoispuolelle (~75 kilometriä). Tai moottoritiellä 120 km/h kulkeva auto olisi edennyt riisinjyvän pituuden eteenpäin (8,3 millimetriä). (Laskutehtävät ChatGPT)
 
 ## Lähteet
 
@@ -243,3 +243,6 @@ Link-PP Community
 
 Brian McFee, Digital Signals Theory
 - 2.1. Sampling Period and rate: https://brianmcfee.net/dstbook-site/content/ch02-sampling/Sampling.html
+
+ChatGPT
+- Laskutehtävät 250 µs esimerkkeihin
