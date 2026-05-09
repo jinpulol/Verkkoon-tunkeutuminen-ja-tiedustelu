@@ -25,6 +25,11 @@ Tarkemmat tehtävän annot löytyvät [täältä](https://terokarvinen.com/verkk
     - Signaali on ASK/OOK-moduloitu, eli kantoaalto on käytännössä joko päällä tai pois.
   - URH:ssa signaali rajataan, analysoidaan ja muutetaan bittivirraksi pulssien ja taukojen pituuksien perusteella.
     - Bittidatasta voidaan päätellä esimerkiksi anturin ID, kanava, lämpötila, ilmankosteus ja pariston tila.
+   
+## a) Lähteet ja läppäri
+
+  - Lähteet tarkistettu: ✔️
+  - Läppäri valmis CTF: ✔️
 
 ## b) rtl_433
 
